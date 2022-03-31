@@ -1,0 +1,8 @@
+div {
+  border: black 3px solid;
+  overflow: auto;
+}
+
+img {
+  float: right;
+}

@@ -1,0 +1,97 @@
+<div class="float-right"></div>
+
+<div class="navbar-nav-scroll navbar-center">
+{% if is_granted('ROLE_ADMIN') %}
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+       <li class="nav-item">
+                    <a class="nav-link" href="{{path('dashboard')}}">
+                        <i class="nav-icon icon-home"></i> Inicio </a>
+                </li>
+     <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajeros')}}">
+                        <i class="nav-icon  icon-plane"></i> Resultados </a>
+                </li>
+       <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajero_notificados')}}">
+                        <i class="nav-icon icon-envelope"></i> Resultados enviados </a>
+                </li> 
+        <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajeros_sin_notificar')}}">
+                        <i class="nav-icon icon-bell"></i> Resultados pendientes de envio</a>
+                 {# </li>
+                   <li class="nav-item">
+                    <a class="nav-link" href="{{path('cargar_resultados')}}">
+                        <i class="nav-icon  icon-wrench"></i> Importar Resultados</a>
+                </li>  #}
+        <li class="dropdown">
+                        <a href="#" class=" nav-link dropdown-toggle" data-toggle="dropdown"><i class="nav-icon  icon-user"></i> Administracion <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{path('user_index')}}" class="nav-link">Usuarios</a></li>
+                          <li><a href="{{path('role_index')}}" class="nav-link">Permisos</a></li>
+                          
+                        </ul>
+                      </li>
+                      
+    <li class="nav-item float-right">
+    <a href="{{path('app_logout')}}" class="nav-link float-right">Cerrar Sesion</a>
+    </li>
+    </ul>
+    
+{% elseif is_granted('ROLE_JEFE') %}
+    <ul class="navbar-nav">
+     <li class="nav-item">
+                    <a class="nav-link" href="{{path('dashboard')}}">
+                        <i class="nav-icon icon-home"></i> Inicio </a>
+                </li>
+     <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajeros')}}">
+                        <i class="nav-icon  icon-plane"></i> Resultados </a>
+                </li>
+       <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajero_notificados')}}">
+                        <i class="nav-icon icon-envelope"></i> Resultados enviados </a>
+                </li> 
+        <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajeros_sin_notificar')}}">
+                        <i class="nav-icon icon-bell"></i> Resultados pendientes de envio</a>
+                </li>
+    <li class="nav-item float-right">
+    <a href="{{path('app_logout')}}" class="nav-link float-right"> <i class="nav-icon icon-lock"></i> Cerrar Sesion</a>
+    </li>
+        {# <li class="nav-item">
+                    <a class="nav-link" href="{{path('cargar_resultados')}}">
+                        <i class="nav-icon  icon-wrench"></i> Importar Resultados</a>
+                </li> #}
+    
+    </ul>
+
+{% else %}
+    <ul class="navbar-nav">
+     <li class="nav-item">
+                    <a class="nav-link" href="{{path('dashboard')}}">
+                        <i class="nav-icon icon-home"></i> Inicio </a>
+                </li>
+     <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajeros')}}">
+                        <i class="nav-icon  icon-plane"></i> Resultados </a>
+                </li>
+       <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajero_notificados')}}">
+                        <i class="nav-icon icon-envelope"></i> Resultados enviados </a>
+                </li> 
+        <li class="nav-item">
+                    <a class="nav-link" href="{{path('viajeros_sin_notificar')}}">
+                        <i class="nav-icon icon-bell"></i> Resultados pendientes de envio</a>
+                </li>
+         <li class="nav-item float-right">
+    <a href="{{path('app_logout')}}" class="nav-link float-right"> <i class="nav-icon icon-lock"></i> Cerrar Sesion</a>
+    </li>
+    </ul>
+
+{% endif %}
+</div>
+<div class="float-left"></div>
+
+{#<div class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">#}
+
+{#</div>#}

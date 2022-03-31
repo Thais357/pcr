@@ -1,0 +1,89 @@
+{% extends 'layout/layout.html.twig' %}
+    {#{% block header %}#}
+      {#{{ include('layout/header.html.twig') }}#}
+    {#{% endblock %}#}
+{% block stylesheets %}
+  {{ parent() }}
+  <!-- CoreUI CSS -->
+  <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('build/css/style.css') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% endblock %}
+{% block main %}
+  <div class="container-fluid">
+    <div class="animated fadeIn">
+
+      <center>
+        <div class="card">
+          <div class="card-body">
+            {% for g in app.user.grupos %}
+            {% if g.nombre=='Administradores' or g.nombre=='Tecnicos' %}
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="callout callout-info">
+                  <small class="text-muted">Equipos en taller</small>
+                  <br>
+                  <strong class="h4">{{ totalResultados }}</strong>
+                  <div class="chart-wrapper">
+                    <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="callout callout-danger">
+                  <small class="text-muted">Incidencias no atendidas</small>
+                  <br>
+                  <strong class="h4">{{ notificados }}</strong>
+                  <div class="chart-wrapper">
+                    <canvas id="sparkline-chart-2" width="100" height="30"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="callout callout-warning">
+                  <small class="text-muted">Equipos en almacen de Computacion</small>
+                  <br>
+                  <strong class="h4">{{ sinNotificar }}</strong>
+                  <div class="chart-wrapper">
+                    <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="callout callout-success">
+                  <small class="text-muted">Incidencias en proceso</small>
+                  <br>
+                  <strong class="h4">{{ totalEnProceso }}</strong>
+                  <div class="chart-wrapper">
+                    <canvas id="sparkline-chart-2" width="100" height="30"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <hr>
+            <strong><h1 class="display-4"><strong> Sistema Integral de Gestión Informática </strong></h1></strong>
+            <h3>Clinica Internacional "Camilo Cienfuegos"</h3>
+            <p>Bienvenido {{ app.user.firstname }}</p>
+            {#<p class="lead"> <em>Este sistema  es el encargado de controlar todos los reportes realizados por#}
+            {#el Departamento de Informática. </em></p>#}
+            <img class="navbar-brand-full" src="{{ asset('img/brand/1.png') }}" alt="Reportes">
+            <hr class="my-4">
+
+
+          </div>
+        </div>
+      </center>
+
+    </div>
+  </div>
+  </div>
+
+{% endblock %}

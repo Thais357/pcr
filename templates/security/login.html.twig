@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>Sistema de Resultados PCR</title>
+    <!-- Icons-->
+    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+</head>
+
+<div class="app flex-row align-items-center" >
+<div class="container" >
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+<body class="text-center" background="{{ asset('img/fondo.jpg') }}" background-width="auto">
+<main class="form-signin" >
+  <form method="post">
+      {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Ya estas logueado como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+    <img class="mb-4" src="{{asset('img/pcr3.png')}}" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal text-light">Sistema de Resultados de PCR</h1>
+    <label for="username" class="visually-hidden text-light" style="">Usuario</label>
+    <input type="text" value="{{ last_username }}" name="username" id="_username" class="form-control " required autofocus>
+    <label for="inputPassword" class="visually-hidden text-light">Contraseña</label>
+    <input type="password" name="password" id="inputPassword" class="form-control " required><br><br>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Acceder</button>
+            <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+    <p class="mt-5 mb-3 text-muted">© 2021</p>
+  </form>
+</main>
+</body>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+

@@ -1,0 +1,49 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+  {{ parent() }}
+
+
+{% endblock %}
+{% block body %}
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6">
+        {% for message in app.session.flashBag.get('success') %}
+          <div class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+<br>
+<div class="card" >
+  <div class="card-header">
+     <h4>Editar datos de {{datos.nombre}}</h4>
+  </div>
+   {{ form_start(formulario) }}
+  <div class="card-body">
+    {{ form_row(formulario.nombre)}}
+    {{ form_row(formulario.correo)}}
+  </div>
+  <div class="card-footer text-muted">
+  <button type="submit" class="btn btn-sm btn-success" formnovalidate><i class="fa fa-save"></i> Editar</button>
+              <a href="{{ path('viajeros',{'id':datos.id}) }}" class="btn btn-sm btn-primary" type="reset" methods="POST"  onclick="document.getElementById('reset').value = 1; forms[0].submit()">
+                                    <i class="fa fa-arrow-circle-left"></i> Atras
+                                </a>
+       
+  </div>
+{{form_end(formulario)}}
+</div>
+</div>
+
+   
+
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+
+
+ 
+{% endblock %}

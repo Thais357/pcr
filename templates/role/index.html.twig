@@ -1,0 +1,38 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}
+Rol
+{% endblock %}
+{% block body %}
+    <h1>Roles</h1>
+ <a href="{{ path('role_new') }}" class="btn btn-success float-right">Crear nuevo <i class="icon icon-plus"></i></a><br><br>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for role in roles %}
+            <tr>
+                <td>{{ role.id }}</td>
+                <td>{{ role.name }}</td>
+                <td>{{ role.description }}</td>
+                <td>
+                    <a href="{{ path('role_show', {'id': role.id}) }}" class="btn btn-success">Ver <i class="icon icon-eye"></i></a>
+                    <a href="{{ path('role_edit', {'id': role.id}) }}"  class="btn btn-info">Editar <i class="icon icon-pencil"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

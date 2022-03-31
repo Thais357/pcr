@@ -1,0 +1,56 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+  {{ parent() }}
+
+
+{% endblock %}
+{% block body %}
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        {% for message in app.session.flashBag.get('success') %}
+          <div class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+    <div class="card">
+      <div class="card-header">
+        <h4>Importar excel con los resultados de los pcr</h4>
+      </div>
+      </div>
+    <div class="card-body">
+          <form class="form-inline"
+                  method="post" action="{{ path('importarPCR') }}" enctype="multipart/form-data">
+          
+
+            <input type="file"  name="fileToUpload" id="archivo" placeholder="Archivo (.xlsx)">
+
+
+        
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-sm btn-primary" type="submit"
+                      onclick="document.getElementById('reset').value = 0; forms[0].submit()">
+                <i class="fa fa-dot-circle-o"></i> Aceptar
+              </button>
+
+          
+            </form>
+    </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+
+
+ 
+{% endblock %}

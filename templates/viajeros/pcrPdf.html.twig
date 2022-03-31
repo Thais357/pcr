@@ -1,0 +1,71 @@
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link  href={{ asset('build/css/estiloPCRPDF.css') }}  rel="stylesheet">
+    {#<link href="{{ asset('build/css/estiloPCRPDF.css') }}"  rel="stylesheet">#}
+  </head>
+  <body>
+  <img src="{{ 'https://reportes.cicc.cu/img/logoIpk.png' }}" alt="logo de la clinica" />
+  <img src="{{ 'https://reportes.cicc.cu/img/logoCICC.png' }}" alt="logo de la clinica" />
+  {% set translateMes = {
+    "January": "Enero",
+    "February": "Febrero",
+    "March": "Marzo",
+    "April": "Abril",
+    "May": "Mayo",
+    "June": "Junio",
+    "July": "Julio",
+    "August":"Agosto",
+    "September":"Septiembre",
+    "October":"Octubre",
+    "November":"Noviembre",
+    "December":"Diciembre"
+  }
+  %}
+
+  <p style="font-size: 21px">La Habana, {{ "now"|date('j')  }} de  {{ translateMes["now"|date('F')] }} de {{ "now"|date("Y") }}<br>Havana, {{ "now"|date("F j") }}  , {{ "now"|date("Y") }}<br>"Año 63 de la Revolución"</p>
+
+  <p style="font-size: 21px">A: Autoridades de Salud Internacional</p><br>
+  <div style="line-height:10px">
+  <p style="font-size: 20px">Nombre: <strong>{{ datosViajero.nombre }}</strong></p>
+    <bold style="font-size: 21px">Pasaporte : <strong>{{ datosViajero.ci }}</strong></bold><br><br>
+  <p style="font-size: 21px">Fecha de toma de muestra de PCR en tiempo real: <strong>{{ datosViajero.fechaSalida |date("d/m/Y")}}</strong> </p>
+  </div>
+  <bold style="font-size: 21px">Numero de muestra : <u><strong>{{ datosViajero.idIPK }}</strong></u></bold><br><br>
+
+  <p style="font-size: 21px"><strong>PCR: {{ datosViajero.resultado |capitalize}}
+
+    {% if (datosViajero.resultado=="Negativo" or datosViajero.resultado=="NEGATIVO "or datosViajero.resultado=="NEGATIVO") %}
+      / Negative
+    {% elseif (datosViajero.resultado=="Positivo" or datosViajero.resultado=="POSITIVO "or datosViajero.resultado=="POSITIVO")%}
+      / Positive
+    {% endif %}</strong></p>
+  <br>
+  <p style="font-size: 21px">Estimados Colegas:</p>
+  <p style="font-size: 21px">Estudio de PCR realizado como parte de la vigilancia en el país para la COVID-19. El resultado del examen puede ser verificado en los registros del laboratorio del Instituto IPK .
+    <br> Lo saluda fraternalmente.
+    <hr>
+  <p style="font-size: 21px"> To: International Health Authorities</p>
+  <p style="font-size: 21px">Dear colleagues:</p>
+  <p style="font-size: 21px">The study was carried out as part of the Cuban surveillance system for COVID-19. The result of the Real Time PCR accomplished in our laboratories data is possible verifier in the IPK laboratory records.
+     <br>Sincerely yours,
+<br>
+  </p><br><br><br><br><br><br><br>
+
+
+  <img src="{{ 'https://reportes.cicc.cu/img/cunoRMedicos.png' }}" alt="logo de la clinica" width="200px" height="100px" align="right" />
+<div class="row" align="left">
+      <div style="line-height:20px">
+      <p style="font-size: 21px" > Lic. Aimee Mompié Rivero<br>
+      Jefa de Departamento Registros Médicos <br>Clínica Internacional Camilo Cienfuegos <br>  </p>
+
+    </div>
+
+
+  </div>
+<br><br><br><br>
+  <a href="https://cicc.cu">www.cicc.cu</a>
+  <footer>Calle L esq 13 #151 Vedado , La Habana</footer>
+  </body>
+
+</html>
+

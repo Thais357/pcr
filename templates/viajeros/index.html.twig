@@ -1,0 +1,135 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block title %}Sistema de Resultados PCR{% endblock %}
+{% block stylesheets %}
+  {{ parent() }}
+
+
+{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .container-fluid {position:auto}
+</style>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        {% for message in app.session.flashBag.get('success') %}
+          <div class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+          {% for message in app.session.flashBag.get('danger') %}
+          <div class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+          <br>
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> <strong>{{nombreMenu}}</strong>
+        {#                            <strong> {% if pagination is not null %} {{ pagination.getTotalItemCount }} {% endif %}</strong>#}
+       
+        <a href="{{path('enviarCorreoPCR') }}" class="btn btn-info float-right"> <i class="icon icon-envelope"></i> Enviar correos</a>
+        {%for rol in app.user.roles  %}
+         {% if( rol=='ROLE_ADMIN') %}
+          <a href="#cargarViajeros" class="btn btn-success float-right" data-toggle="modal"
+          >
+          <i class="nav-icon icon-plus"
+             data-toggle="tooltip" data-placement="bottom"
+             title="Añadir equipo"></i> Cargar Datos</a>
+             {% endif %}
+             {%endfor %}
+      </div>
+      <div class="modal fade" id="cargarViajeros" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Importa excel de resultados de pcr</h5>
+              <button type="button" class="close" data-dismiss="modal"
+                      aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% set seleccion='' %}
+            <form class="form-inline"
+                  method="post" action="{{ path('importarPCR') }}" enctype="multipart/form-data">
+            <div class="modal-body">
+               <input type="hidden" name="token" value="{{ csrf_token('upload') }}" />
+
+            <input type="file"  name="fileToUpload" id="archivo" placeholder="Archivo (.xlsx)">
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-sm btn-primary" type="submit"
+                      onclick="document.getElementById('reset').value = 0; forms[0].submit()">
+                <i class="fa fa-dot-circle-o"></i> Aceptar
+              </button>
+
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    <div class="card-body">
+  <table id="viajeros" class="table table-hover table-striped">
+    <thead>
+    <tr>
+    <th>ID</th>
+    <th>ID IPK</th>
+    <th>Nombre y Apellidos</th>
+    <th>CI /Pasaporte</th>
+    <th>Resultado</th>
+    <th>Fecha Salida</th>
+    <th>Correo</th>
+    <th>Notificado via Correo</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for v in datos %}
+    <tr>
+      <td>{{ v.id }}</td>
+      <td>{{ v.idIPK }}</td>
+      <td>{{ v.nombre }}</td>
+      <td>{{ v.ci }}</td>
+      <td>{{ v.resultado}}</td>
+      <td>
+        {{ v.fechaSalida  }}
+      </td>
+     <td>{{ v.correo }}</td>
+      <td>{{ v.notificado }}</td>
+      <td style="width:auto">
+        <a href="{{ path('obtenerDatosViajero',{"id":v.id}) }}" class="btn btn-info" alt="Obtener ci y correo" > <i class="icon icon-check"></i> </a>
+        <a href="{{ path('editar_datosViajero',{'id':v.id}) }}" class="btn btn-primary"> <i class="icon icon-pencil"></i></a>
+        <a href="{{ path('generarPdf',{'id':v.id}) }}" class="btn btn-success" alt="Modelo PDF"> <i class="icon icon-eye"></i></a>
+        <a href="{{ path('exportaPdf',{'id':v.id}) }}" class="btn btn-warning" alt="Enviar correo"> <i class="icon icon-envelope"></i></a>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+    </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+
+
+  <script>
+    $(document).ready( function () {
+      $('#viajeros').DataTable();
+    } );
+  </script>
+{% endblock %}

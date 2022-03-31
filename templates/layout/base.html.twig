@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+        <link  href={{ asset('build/css/bootstrap.min.css') }}  rel="stylesheet">
+        <link  href={{ asset('build/css/select2.min.css') }}  rel="stylesheet">
+        <link  href={{ asset('build/css/jquery.dataTables.min.css') }}  rel="stylesheet">
+        <link  href={{ asset('build/css/dataTables.bootstrap4.min.css') }}  rel="stylesheet">
+        <link href="{{ asset('build/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('build/css/all.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+    {#<link rel="stylesheet" href="{{ asset('build/css/Chart.css') }}">#}
+    <link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/css/bootstrap-dropdownhover.min.css') }}">
+    <style>
+    .navbar-center {
+   position: fixed;
+    left: 50%;
+    transform: translatex(-50%);
+  } 
+   </style>
+        {% endblock %}
+<header class="app-header navbar navbar-expand-lg navbar navbar-light bg-light center" >
+
+  {% block menu %}
+    <!-- Header content here -->
+   
+   {{ include('layout/menu.html.twig') }}
+   
+  {% endblock %}
+
+   </header>
+    </head>
+   
+    <body class="d-flex flex-column h-100" >
+        {% block body %}
+       
+        {% endblock %}
+    </body>
+    
+    {# <footer class="app-footer">
+  {% block app_footer %}
+    <!-- Footer content here -->
+    {{ include('layout/footer.html.twig') }}
+  {% endblock %}
+</footer> #}
+      {% block javascripts %}
+        <script src={{asset('build/js/jquery.min.js')}}></script>
+        <script src={{asset('build/js/bootstrap.min.js')}}></script>
+        <script src={{asset('build/js/jquery.dataTables.min.js')}}></script>
+        {# <script src={{asset('build/js/vue.js')}}></script> #}
+        <script src="{{ asset('build/js/Chart.js') }}"></script>
+       <script src="{{ asset('build/js/select2.js') }}"></script>
+       <script src="{{ asset('build/js/bootstrap.min.js') }}"></script>
+       {# <script src="{{ asset('build/js/bootstrap-dropdownhover.min.js') }}"></script> #}
+        {% endblock %}
+</html>

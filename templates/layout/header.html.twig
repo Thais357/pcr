@@ -1,0 +1,79 @@
+<button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<a class="navbar-brand" href="{{ path('control_reportes') }}">
+    <img class="navbar-brand-full" src="{{ asset('img/brand/logo2.png') }}" width="90" height="60" alt=" Logo">
+    <img class="navbar-brand-minimized" src="{{ asset('img/brand/sygnet.svg') }}" width="30" height="30"
+         alt="CoreUI Logo">
+</a>
+
+
+<ul class="nav navbar-nav ml-auto">
+    <li class="nav-item  ">
+        <a class="nav-link " data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+           aria-expanded="false">
+            Usuario: {{ app.user.firstname }} {{ app.user.lastname }}
+            <img class="img-avatar" src="{{ asset('img/avatars/usuario-registrados.png') }}" alt="">
+        </a>
+        <div class="dropdown-menu ">
+            <a class="dropdown-item"><i class="fa fa-universal-access"></i> Rol de usuario:
+                {#                  {% set rol=app.user.grupos.rol %}#}
+                {#                  {% for r in app.user.grupos %}#}
+                {% if is_granted('ROLE_ADMIN') %}
+                    Administrador
+                {% elseif is_granted('ROLE_TECNICO') %}
+                    Tecnico
+                {% elseif  is_granted('ROLE_JEFE_DEP') %}
+                    Jefe de departamento
+                {% elseif  is_granted('ROLE_AFT') %}
+                    Activos Fijos
+                {% else %}
+                    Usuario
+                {% endif %}
+
+            </a>
+{#            {% if is_granted('ROLE_ADMIN') or   is_granted('ROLE_JEFE_DEP') or  is_granted('ROLE_AFT') %}#}
+{#                <a class="dropdown-item" href="{{ path('modificar_cuenta') }}"><i class="fa fa-hashtag"></i> Modificar numero de solicitud</a>#}
+{#                <a class="dropdown-item" href="#exampleModal{{app.user.consecutivoSolicitud }}" data-toggle="modal"#}
+{#                   data-whatever="{{ app.user.consecutivoSolicitud }} ">#}
+{#                    <i class="fa fa-hashtag"></i></i>Modificar numero de solicitud</a>#}
+{#                <div class="modal fade" id="exampleModal{{  app.user.consecutivoSolicitud}}" tabindex="-1"#}
+{#                     role="dialog"#}
+{#                     aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#                    <div class="modal-dialog modal-dialog-centered" role="document">#}
+{#                        <div class="modal-content">#}
+{#                            <div class="modal-header">#}
+{#                                <h5 class="modal-title" id="exampleModalLabel">Desactivar#}
+{#                                    estación</h5>#}
+{#                                <button type="button" class="close" data-dismiss="modal"#}
+{#                                        aria-label="Close">#}
+{#                                    <span aria-hidden="true">&times;</span>#}
+{#                                </button>#}
+{#                            </div>#}
+{#                            <div class="modal-body">#}
+{#                                Desea desactivar esta estación de trabajo?#}
+
+{#                            </div>#}
+{#                            <div class="modal-footer">#}
+{#                                <button type="button" class="btn btn-secondary"#}
+{#                                        data-dismiss="modal">Cancelar#}
+{#                                </button>#}
+{#                                <a href="{{ path('desactivar_estacion',{'id':incidencia.id}) }}"#}
+{#                                   class="btn btn-primary">Aceptar</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endif %}#}
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_AFT') or is_granted('ROLE_JEFE_DEP') %}
+                <a class="dropdown-item" href="{{ path('cambiar_consecutivo') }}"><i class="fa fa-hashtag"></i> Modificar numero solicitud</a>
+            {% endif %}
+            <a class="dropdown-item" href="{{ path('modificar_cuenta') }}"><i class="fa fa-key"></i> Cambiar contraseña</a>
+            <a class="dropdown-item" href="{{ path('user_logout') }}"><i class="fa fa-lock"></i> Cerrar Sesión</a>
+        </div>
+    </li>
+</ul>
+{#<div class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">#}
+
+{#</div>#}
